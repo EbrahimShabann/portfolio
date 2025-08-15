@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebrahim Shaban | Full Stack .NET Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
+            --gray: #2d2d2d;
+            --dark-gray: #1e1e1e;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode {
+            background-color: #f8f9fa;
+            color: var(--text-dark);
+        }
+        
+        .light-mode .card {
+            background-color: white;
+            color: var(--text-dark);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .light-mode .contact-form .form-control {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+        }
+        
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .light-mode .navbar {
+            background-color: rgba(248, 249, 250, 0.9) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .light-mode .hero-section {
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(110, 72, 170, 0.15) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .card {
+            background-color: var(--dark-gray);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            color: var(--text-light);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(110, 72, 170, 0.3);
+        }
+        
+        .light-mode .card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-card {
+            height: 100%;
+        }
+        
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .project-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .project-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+        
+        .light-mode .project-overlay {
+            background: rgba(248, 249, 250, 0.9);
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+        
+        .project-links {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+        }
+        
+        .btn-primary-custom:hover {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-custom {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline-custom:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .light-mode .btn-outline-custom {
+            color: var(--primary);
+        }
+        
+        .light-mode .btn-outline-custom:hover {
+            color: white;
+        }
+        
+        .contact-form .form-control {
+            background-color: var(--gray);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .contact-form .form-control:focus {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(110, 72, 170, 0.25);
+        }
+        
+        footer {
+            background-color: var(--darker);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .light-mode footer {
+            background-color: #e9ecef;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -100px;
+            filter: blur(60px);
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            left: -50px;
+            filter: blur(40px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: 2px solid var(--dark);
+        }
+        
+        .light-mode .timeline-item::before {
+            border: 2px solid #f8f9fa;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .theme-toggle:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Project carousel */
+        .project-carousel {
+            height: 100%;
+        }
+        
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .carousel-indicators button.active {
+            background-color: var(--primary);
+        }
+        
+        /* Quick links */
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .light-mode .quick-links a {
+            color: var(--text-dark);
+        }
+        
+        .quick-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Skill icons */
+        .skills-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .skill-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-icon-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-icon-img {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .skill-icon-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .light-mode .skill-icon-label {
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <span class="text-gradient">Ebrahim Shaban</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section vh-100 d-flex align-items-center">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h4 class="text-primary mb-3">Hello, I'm</h4>
+                    <h1 class="display-3 fw-bold mb-4">Ebrahim Shaban</h1>
+                    <h2 class="h2 mb-4 text-gradient">Full Stack .NET Developer</h2>
+                    <p class="lead mb-4">Building robust web applications with cutting-edge .NET technologies and modern frameworks.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-primary-custom btn-lg px-4">Hire Me</a>
+                        <a href="#projects" class="btn btn-outline-custom btn-lg px-4">View Work</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="position-relative d-inline-block">
+                        <img src="/MyPorfolio/photo1689121578.jpeg" alt="Profile Image" class="img-fluid rounded-circle shadow" style="max-width: 350px; border: 5px solid rgba(110, 72, 170, 0.3);">
+                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+                            <span class="visually-hidden">Available for work</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container py-5">
+            <h2 class="fw-bold mb-5 section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p class="lead mb-4">A passionate <span class="text-gradient fw-bold">Full Stack .NET Developer</span> with a background in Biomedical Engineering, transitioning into software development with dedication and enthusiasm.</p>
+                    <p class="mb-4">I specialize in building modern web applications using ASP.NET Core, Angular, and SQL Server. My engineering background gives me a unique problem-solving perspective that I apply to every development challenge.</p>
+                    
+                    <div class="mb-5">
+                        <h4 class="fw-bold mb-4 text-gradient">Experience & Education</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h5 class="fw-bold">Full-Stack Web Development using .NET</h5>
+                                <p class="mb-1">Information Technology Institute (ITI) | March 2025 – July 2025</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5 class="fw-bold">Bachelor of Biomedical Engineering</h5>
+                                <p class=" mb-1">Mansoura University | GPA: 3.69</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow-lg h-100">
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold mb-4 text-gradient">Personal Info</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-3 d-flex">
+                                    <span class="me-3"><i class="bi bi-envelope-fill text-primary"></i></span>
+                                    <span><a href="mailto:ebrahimshabanhamed@gmail.com" class=" text-decoration-none">ebrahimshabanhamed@gmail.com</a></span>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <span class="me-3"><i class="bi bi-phone-fill text-primary"></i></span>
+                                    <span><a href="https://wa.me/201555178340" class=" text-decoration-none">(+20) 1555178340</a></span>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <span class="me-3"><i class="bi bi-geo-alt-fill text-primary"></i></span>
+                                    <span>Mansoura, Egypt</span>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <span class="me-3"><i class="bi bi-translate text-primary"></i></span>
+                                    <span>English (Very Good), Arabic (Native)</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 pt-3 border-top border-secondary">
+                                <h5 class="fw-bold mb-3 text-gradient">Connect With Me</h5>
+                                <div class="d-flex gap-3">
+                                    <a href="https://www.linkedin.com/in/ebrahim-shaban-mosa" class="btn btn-outline-custom rounded-circle" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                    <a href="https://github.com/EbrahimShabann" class="btn btn-outline-custom rounded-circle" target="_blank"><i class="bi bi-github"></i></a>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Skills Section -->
+    <section id="skills" class="py-5 bg-darker">
+        <div class="container py-5">
+            <h2 class="fw-bold mb-5 text-center section-title">Technical Skills</h2>
+            
+            <div class="skills-icons">
+                <div class="skill-icon-item">
+                    <i class="fab fa-microsoft skill-icon-img"></i>
+                    <span class="skill-icon-label">.NET</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-cuttlefish skill-icon-img"></i>
+                    <span class="skill-icon-label">C#</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-js skill-icon-img"></i>
+                    <span class="skill-icon-label">JavaScript</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-angular skill-icon-img"></i>
+                    <span class="skill-icon-label">Angular</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-html5 skill-icon-img"></i>
+                    <span class="skill-icon-label">HTML5</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-css3-alt skill-icon-img"></i>
+                    <span class="skill-icon-label">CSS3</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-bootstrap skill-icon-img"></i>
+                    <span class="skill-icon-label">Bootstrap</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fas fa-database skill-icon-img"></i>
+                    <span class="skill-icon-label">SQL Server</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fas fa-server skill-icon-img"></i>
+                    <span class="skill-icon-label">Web API</span>
+                </div>
+                <div class="skill-icon-item">
+                    <i class="fab fa-git-alt skill-icon-img"></i>
+                    <span class="skill-icon-label">Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container py-5">
+            <h2 class="fw-bold mb-5 text-center section-title">Featured Projects</h2>
+            <div class="row g-4">
+                <!-- Amazon Clone -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card card shadow-lg">
+                        <div id="amazonCarousel" class="carousel slide project-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#amazonCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#amazonCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#amazonCarousel" data-bs-slide-to="2"></button>
+                            </div>
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active h-100">
+                                    <img src="/MyPorfolio/amazon.jpg" class="d-block w-100 project-img" alt="Amazon Clone 1">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/amazone.jpg" class="d-block w-100 project-img" alt="Amazon Clone 2">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/amazon3.jpg" class="d-block w-100 project-img" alt="Amazon Clone 3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5 class="fw-bold text-center">Amazon Clone</h5>
+                            <p class="text-center">Full-Stack E-Commerce Platform with Stripe payments, Google login, and real-time chat</p>
+                            <div class="project-links">
+                                <a href="https://github.com/EbrahimShabann/AmazonFinalProject.git" class="btn btn-primary-custom btn-sm"><i class="bi bi-github"></i> GitHub</a>
+                                <a href="http://amazoclone.runasp.net/" class="btn btn-outline-custom btn-sm"><i class="bi bi-eye"></i> Live Demo</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Online Exam System -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card card shadow-lg">
+                        <div id="examCarousel" class="carousel slide project-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#examCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#examCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#examCarousel" data-bs-slide-to="2"></button>
+                            </div>
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active h-100">
+                                    <img src="/MyPorfolio/exam.jpg" class="d-block w-100 project-img" alt="Online Exam 1">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/exam2.jpg" class="d-block w-100 project-img" alt="Online Exam 2">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/exam3.jpg" class="d-block w-100 project-img" alt="Online Exam 3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5 class="fw-bold text-center">Online Exam System</h5>
+                            <p class="text-center">Angular and ASP.NET Core application for managing online exams with JWT authentication</p>
+                            <div class="project-links">
+                                <a href="https://github.com/EbrahimShabann/ExamSystemUI.git" class="btn btn-primary-custom btn-sm"><i class="bi bi-github"></i> GitHub</a>
+                                <a href="https://ebrahimshabann.github.io/ExamSystemUI/" class="btn btn-outline-custom btn-sm"><i class="bi bi-eye"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inventory Management -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card card shadow-lg">
+                        <div id="inventoryCarousel" class="carousel slide project-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#inventoryCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#inventoryCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#inventoryCarousel" data-bs-slide-to="2"></button>
+                            </div>
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active h-100">
+                                    <img src="/MyPorfolio/inventory.jpg" class="d-block w-100 project-img" alt="Inventory 1">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/inv.jpg" class="d-block w-100 project-img" alt="Inventory 2">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/inv2.jpg" class="d-block w-100 project-img" alt="Inventory 3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5 class="fw-bold text-center">Inventory Management</h5>
+                            <p class="text-center">ASP.NET Core MVC application for tracking products, users, and roles</p>
+                            <div class="project-links">
+                                <a href="https://github.com/EbrahimShabann/InventoryManagementSystem.git" class="btn btn-primary-custom btn-sm"><i class="bi bi-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Multi Actor E-commerce -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card card shadow-lg">
+                        <div id="multiCarousel" class="carousel slide project-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#multiCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#multiCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#multiCarousel" data-bs-slide-to="2"></button>
+                            </div>
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active h-100">
+                                    <img src="/MyPorfolio/multi.jpg" class="d-block w-100 project-img" alt="Multi E-commerce 1">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/multi2.jpg" class="d-block w-100 project-img" alt="Multi E-commerce 2">
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <img src="/MyPorfolio/multi3.jpg" class="d-block w-100 project-img" alt="Multi E-commerce 3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5 class="fw-bold text-center">Multi Actor E-commerce</h5>
+                            <p class="text-center">Responsive e-commerce system with three distinct user roles</p>
+                            <div class="project-links">
+                                <a href="https://github.com/EbrahimShabann/Multi_Actor_E-Commerce.git" class="btn btn-primary-custom btn-sm"><i class="bi bi-github"></i> GitHub</a>
+                                <a href="https://multiactorecommerce-bc050.firebaseapp.com/" class="btn btn-outline-custom btn-sm"><i class="bi bi-eye"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-darker">
+        <div class="container py-5">
+            <h2 class="fw-bold mb-5 text-center section-title">Get In Touch</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <h4 class="fw-bold mb-4 text-gradient">Contact Info</h4>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-4 d-flex">
+                                            <span class="me-3"><i class="bi bi-envelope-fill text-primary"></i></span>
+                                            <span><a href="mailto:ebrahimshabanhamed@gmail.com" class=" text-decoration-none">ebrahimshabanhamed@gmail.com</a></span>
+                                        </li>
+                                        <li class="mb-4 d-flex">
+                                            <span class="me-3"><i class="bi bi-phone-fill text-primary"></i></span>
+                                            <span><a href="https://wa.me/201555178340" class=" text-decoration-none">(+20) 1555178340</a></span>
+                                        </li>
+                                        <li class="mb-4 d-flex">
+                                            <span class="me-3"><i class="bi bi-geo-alt-fill text-primary"></i></span>
+                                            <span>Mansoura, Egypt</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-5">
+                                        <h5 class="fw-bold mb-3 text-gradient">Follow Me</h5>
+                                        <div class="d-flex gap-3">
+                                            <a href="https://www.linkedin.com/in/ebrahim-shaban-mosa" class="btn btn-outline-custom rounded-circle" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                            <a href="https://github.com/EbrahimShabann" class="btn btn-outline-custom rounded-circle" target="_blank"><i class="bi bi-github"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h4 class="fw-bold mb-4 text-gradient">Send a Message</h4>
+                                    <form id="contactForm" class="contact-form">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="subject" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Message</label>
+                                            <textarea class="form-control" id="message" rows="4" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary-custom w-100">Send Message</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container">
+            <div class="quick-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 <span class="text-gradient fw-bold">Ebrahim Shaban</span>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#home" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
+    
+    <!-- Theme toggle button -->
+    <button class="theme-toggle"><i class="bi bi-moon-stars"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Change nav link active class on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 400) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        // Theme toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            document.querySelector('nav').classList.toggle('navbar-dark');
+            if (document.body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = '<i class="bi bi-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="bi bi-moon-stars"></i>';
+            }
+        });
+        
+        // Contact form submission to WhatsApp
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0ASubject: ${subject}%0AMessage: ${message}`;
+            const whatsappUrl = `https://wa.me/201555178340?text=${whatsappMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Show success message
+            alert('Message sent successfully! You will be redirected to WhatsApp.');
+        });
+        
+        // Initialize carousels
+        const carousels = document.querySelectorAll('.carousel');
+        carousels.forEach(carousel => {
+            new bootstrap.Carousel(carousel, {
+                interval: 3000,
+                pause: 'hover'
+            });
+        });
+    </script>
+</body>
+</html>
